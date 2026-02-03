@@ -39,6 +39,8 @@ function App() {
                 {/* Product Routes */}
                 <Route path="/products" element={<CategoryPage />} />
                 <Route path="/products/:categoryId" element={<CategoryPage />} />
+                <Route path="/categories" element={<CategoryPage />} />
+
 
                 <Route path="/dashboard" element={
                   <ProtectedRoute>
