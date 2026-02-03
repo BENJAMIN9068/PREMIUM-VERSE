@@ -3,6 +3,7 @@ import Footer from '../../components/layout/Footer';
 import HeroSection from '../../components/home/HeroSection';
 import CategorySection from '../../components/home/CategorySection';
 import ProductGrid from '../../components/home/ProductGrid';
+import ProductsSection from '../../components/products/ProductsSection';
 import TrustElements from '../../components/home/TrustElements';
 import Testimonials from '../../components/home/Testimonials';
 import SpaceBackground from '../../components/ui/SpaceBackground';
@@ -20,6 +21,7 @@ const HomePage = () => {
                     <HeroSection />
                     <CategorySection />
                     <ProductGrid />
+                    <ProductsSection />
                     <TrustElements />
                     <Testimonials />
                 </main>
@@ -30,3 +32,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
