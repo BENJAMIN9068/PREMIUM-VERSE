@@ -7,6 +7,7 @@ import LoginPage from './pages/auth/LoginPage';
 import AddressPage from './pages/auth/AddressPage';
 import HomePage from './pages/home/HomePage';
 import UserDashboardPage from './pages/dashboard/UserDashboardPage';
+import CategoryPage from './pages/products/CategoryPage';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 import { AdminAuthProvider } from './context/AdminAuthContext';
 import AdminLoginPage from './pages/admin/AdminLoginPage';
@@ -34,6 +35,11 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/address" element={<AddressPage />} />
                 <Route path="/home" element={<HomePage />} />
+
+                {/* Product Routes */}
+                <Route path="/products" element={<CategoryPage />} />
+                <Route path="/products/:categoryId" element={<CategoryPage />} />
+
                 <Route path="/dashboard" element={
                   <ProtectedRoute>
                     <UserDashboardPage />
@@ -68,3 +74,4 @@ function App() {
 }
 
 export default App;
+

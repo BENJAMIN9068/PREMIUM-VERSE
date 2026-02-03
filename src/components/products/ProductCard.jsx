@@ -47,11 +47,24 @@ const ProductCard = ({ product, index }) => {
                 {discount}% OFF
             </div>
 
-            {/* Product Image/Icon */}
-            <div className="h-24 bg-gradient-to-br from-white/5 to-transparent flex items-center justify-center group-hover:from-primary/10 transition-colors">
-                <span className="text-5xl group-hover:scale-110 transition-transform duration-300">
-                    {product.image}
-                </span>
+            {/* Product Logo */}
+            <div className="h-28 bg-gradient-to-br from-white/5 to-transparent flex items-center justify-center group-hover:from-primary/10 transition-colors p-4">
+                {product.logo ? (
+                    <img
+                        src={product.logo}
+                        alt={product.name}
+                        className="w-16 h-16 object-contain filter invert opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.style.display = 'none';
+                            e.target.parentElement.innerHTML = `<span class="text-5xl">${product.image || '📦'}</span>`;
+                        }}
+                    />
+                ) : (
+                    <span className="text-5xl group-hover:scale-110 transition-transform duration-300">
+                        {product.image || '📦'}
+                    </span>
+                )}
             </div>
 
             {/* Content */}
