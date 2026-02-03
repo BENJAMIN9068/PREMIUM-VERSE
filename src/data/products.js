@@ -4,77 +4,78 @@
 // Logo URLs from reliable CDN sources
 const LOGOS = {
     // OTT
-    youtube: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg',
-    netflix: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/netflix.svg',
-    primevideo: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/primevideo.svg',
-    hotstar: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/hotstar.svg',
-    zee5: 'https://upload.wikimedia.org/wikipedia/commons/3/3a/Zee5-official-logo.png',
-    sonyliv: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Sony_LIV_logo.svg/200px-Sony_LIV_logo.svg.png',
-    jiocinema: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/JioCinema_Logo.svg/200px-JioCinema_Logo.svg.png',
+    youtube: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtube.svg',
+    netflix: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/netflix.svg',
+    primevideo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/primevideo.svg',
+    hotstar: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/hotstar.svg',
+    zee5: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/zee5.svg',
+    sonyliv: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/sony.svg',
+    jiocinema: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/jio.svg',
 
     // Music
-    spotify: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/spotify.svg',
-    youtubemusic: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtubemusic.svg',
+    spotify: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/spotify.svg',
+    youtubemusic: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/youtubemusic.svg',
 
     // AI
-    chatgpt: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/openai.svg',
-    claude: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/anthropic.svg',
-    gemini: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googlegemini.svg',
-    midjourney: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/midjourney.svg',
-    copilot: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/githubcopilot.svg',
+    chatgpt: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/openai.svg',
+    claude: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/anthropic.svg',
+    gemini: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/google.svg',
+    midjourney: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/discord.svg',
+    copilot: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/github.svg',
+    perplexity: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/perplexity.svg',
 
     // Software
-    microsoft: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoft.svg',
-    windows: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/windows11.svg',
-    office: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftoffice.svg',
+    microsoft: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/microsoft.svg',
+    windows: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/windows11.svg',
+    office: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/microsoftoffice.svg',
 
     // Adobe
-    adobe: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/adobe.svg',
-    photoshop: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/adobephotoshop.svg',
-    premiere: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/adobepremierepro.svg',
-    illustrator: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/adobeillustrator.svg',
-    acrobat: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/adobeacrobatreader.svg',
+    adobe: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/adobe.svg',
+    photoshop: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/adobephotoshop.svg',
+    premiere: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/adobepremierepro.svg',
+    illustrator: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/adobeillustrator.svg',
+    acrobat: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/adobeacrobatreader.svg',
 
     // Design
-    canva: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/canva.svg',
-    figma: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/figma.svg',
-    coreldraw: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/coreldraw.svg',
+    canva: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/canva.svg',
+    figma: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/figma.svg',
+    coreldraw: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/coreldraw.svg',
 
     // Cloud
-    googlecloud: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googlecloud.svg',
-    onedrive: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftonedrive.svg',
-    dropbox: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/dropbox.svg',
+    googlecloud: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/googlecloud.svg',
+    onedrive: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/microsoftonedrive.svg',
+    dropbox: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/dropbox.svg',
 
     // VPN
-    nordvpn: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/nordvpn.svg',
-    expressvpn: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/expressvpn.svg',
-    surfshark: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/surfshark.svg',
-    protonvpn: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/protonvpn.svg',
+    nordvpn: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/nordvpn.svg',
+    expressvpn: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/expressvpn.svg',
+    surfshark: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/surfshark.svg',
+    protonvpn: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/protonvpn.svg',
 
     // Security
-    malwarebytes: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/malwarebytes.svg',
-    kaspersky: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/kaspersky.svg',
-    norton: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/norton.svg',
+    malwarebytes: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/malwarebytes.svg',
+    kaspersky: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/kaspersky.svg',
+    norton: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/norton.svg',
 
     // Gaming
-    xbox: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/xbox.svg',
-    playstation: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/playstation.svg',
-    steam: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/steam.svg',
+    xbox: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/xbox.svg',
+    playstation: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/playstation.svg',
+    steam: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/steam.svg',
 
     // Productivity
-    grammarly: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/grammarly.svg',
-    notion: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/notion.svg',
+    grammarly: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/grammarly.svg',
+    notion: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/notion.svg',
 
     // Education
-    coursera: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/coursera.svg',
-    linkedin: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg',
-    udemy: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/udemy.svg',
-    skillshare: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/skillshare.svg',
+    coursera: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/coursera.svg',
+    linkedin: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linkedin.svg',
+    udemy: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/udemy.svg',
+    skillshare: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/skillshare.svg',
 
     // Others
-    autodesk: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/autodesk.svg',
-    envato: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/envato.svg',
-    shutterstock: 'https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/shutterstock.svg',
+    autodesk: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/autodesk.svg',
+    envato: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/envato.svg',
+    shutterstock: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/shutterstock.svg',
 };
 
 export const PRODUCT_CATEGORIES = [
@@ -134,7 +135,7 @@ export const PRODUCTS = [
     { id: 'chatgpt-1m', name: 'ChatGPT Plus', plan: '1 Month (Shared)', price: 299, originalPrice: 1650, category: 'ai_tools', badge: 'Hot', logo: LOGOS.chatgpt },
     { id: 'chatgpt-own', name: 'ChatGPT Plus', plan: '1 Month (Own Account)', price: 999, originalPrice: 1650, category: 'ai_tools', logo: LOGOS.chatgpt },
     { id: 'claude-1m', name: 'Claude Pro', plan: '1 Month', price: 499, originalPrice: 1650, category: 'ai_tools', logo: LOGOS.claude },
-    { id: 'perplexity-1m', name: 'Perplexity Pro', plan: '1 Month', price: 399, originalPrice: 1650, category: 'ai_tools', logo: LOGOS.chatgpt },
+    { id: 'perplexity-1m', name: 'Perplexity Pro', plan: '1 Month', price: 399, originalPrice: 1650, category: 'ai_tools', logo: LOGOS.perplexity },
     { id: 'midjourney-1m', name: 'Midjourney', plan: '1 Month', price: 599, originalPrice: 2500, category: 'ai_tools', logo: LOGOS.midjourney },
     { id: 'gemini-1m', name: 'Google Gemini Advanced', plan: '1 Month', price: 399, originalPrice: 1650, category: 'ai_tools', badge: 'New', logo: LOGOS.gemini },
     { id: 'copilot-1m', name: 'Microsoft Copilot Pro', plan: '1 Month', price: 499, originalPrice: 1650, category: 'ai_tools', logo: LOGOS.copilot },
