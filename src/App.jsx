@@ -17,6 +17,7 @@ import Dashboard from './pages/admin/Dashboard';
 import StockManagement from './pages/admin/StockManagement';
 import ProductsPage from './pages/admin/ProductsPage';
 import AdminDealsPage from './pages/admin/DealsPage';
+import LeadsPage from './pages/admin/LeadsPage';
 import PublicDealsPage from './pages/deals/DealsPage';
 import WarpPreloader from './components/ui/WarpPreloader';
 
@@ -67,9 +68,8 @@ function App() {
                   <Route path="products" element={<ProductsPage />} />
                   <Route path="deals" element={<AdminDealsPage />} />
                   <Route path="stock" element={<StockManagement />} />
-                  {/* Placeholders for other admin pages */}
                   <Route path="orders" element={<div className="text-white">Orders Page</div>} />
-                  <Route path="customers" element={<div className="text-white">Customers Page</div>} />
+                  <Route path="leads" element={<LeadsPage />} />
                   <Route path="payments" element={<div className="text-white">Payments Page</div>} />
                   <Route path="settings" element={<div className="text-white">Settings Page</div>} />
                 </Route>

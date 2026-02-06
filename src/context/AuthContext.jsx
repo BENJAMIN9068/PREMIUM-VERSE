@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { LeadsStore } from '../data/leadsStore';
 
 const AuthContext = createContext();
 
@@ -33,6 +34,10 @@ export const AuthProvider = ({ children }) => {
         };
         setUser(userData);
         localStorage.setItem('user', JSON.stringify(userData));
+
+        // Save to leads store
+        LeadsStore.addLead(userData);
+
         return Promise.resolve(userData);
     };
 
@@ -56,6 +61,10 @@ export const AuthProvider = ({ children }) => {
 
                 setUser(userData);
                 localStorage.setItem('user', JSON.stringify(userData));
+
+                // Save to leads store
+                LeadsStore.addLead(userData);
+
                 resolve(userData);
             } catch (error) {
                 console.error('Google login error:', error);
@@ -87,10 +96,14 @@ export const AuthProvider = ({ children }) => {
         const newUser = {
             ...userData,
             id: 'user-' + Date.now(),
-            authProvider: 'email'
+            authProvider: userData.authProvider || 'email'
         };
         setUser(newUser);
         localStorage.setItem('user', JSON.stringify(newUser));
+
+        // Save to leads store
+        LeadsStore.addLead(newUser);
+
         return Promise.resolve(newUser);
     };
 
@@ -100,11 +113,29 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('user');
     };
 
-    // Update address
-    const updateAddress = (address) => {
-        const updatedUser = { ...user, address, isAddressComplete: true };
+    // Update address (and update lead)
+    const updateAddress = (addressData) => {
+        const updatedUser = {
+            ...user,
+            ...addressData,
+            isAddressComplete: true
+        };
         setUser(updatedUser);
         localStorage.setItem('user', JSON.stringify(updatedUser));
+
+        // Update lead with address info
+        if (user?.email) {
+            LeadsStore.updateLeadByEmail(user.email, {
+                phone: addressData.phone || user.phone,
+                street: addressData.street,
+                city: addressData.city,
+                state: addressData.state,
+                pincode: addressData.pincode,
+                country: addressData.country,
+                country_code: addressData.countryCode,
+                is_address_complete: true
+            });
+        }
     };
 
     const value = {

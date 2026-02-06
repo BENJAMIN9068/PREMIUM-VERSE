@@ -23,7 +23,7 @@ const AdminLayout = () => {
         { icon: Zap, label: "Today's Deals", path: '/admin/deals' },
         { icon: Package, label: 'Stock Management', path: '/admin/stock' },
         { icon: ShoppingBag, label: 'Orders', path: '/admin/orders' },
-        { icon: Users, label: 'Customers', path: '/admin/customers' },
+        { icon: Users, label: 'Leads', path: '/admin/leads' },
         { icon: CreditCard, label: 'Payments', path: '/admin/payments' },
         { icon: Settings, label: 'Settings', path: '/admin/settings' },
     ];
