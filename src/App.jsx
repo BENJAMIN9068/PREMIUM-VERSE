@@ -16,6 +16,8 @@ import ProtectedAdminRoute from './components/admin/ProtectedAdminRoute';
 import Dashboard from './pages/admin/Dashboard';
 import StockManagement from './pages/admin/StockManagement';
 import ProductsPage from './pages/admin/ProductsPage';
+import AdminDealsPage from './pages/admin/DealsPage';
+import PublicDealsPage from './pages/deals/DealsPage';
 import WarpPreloader from './components/ui/WarpPreloader';
 
 function App() {
@@ -53,6 +55,9 @@ function App() {
                 <Route path="/admin/login" element={<AdminLoginPage />} />
                 <Route path="/admin-sales" element={<Navigate to="/admin/dashboard" replace />} />
 
+                {/* Public Deals Page */}
+                <Route path="/deals" element={<PublicDealsPage />} />
+
                 <Route path="/admin" element={
                   <ProtectedAdminRoute>
                     <AdminLayout />
@@ -60,6 +65,7 @@ function App() {
                 }>
                   <Route path="dashboard" element={<Dashboard />} />
                   <Route path="products" element={<ProductsPage />} />
+                  <Route path="deals" element={<AdminDealsPage />} />
                   <Route path="stock" element={<StockManagement />} />
                   {/* Placeholders for other admin pages */}
                   <Route path="orders" element={<div className="text-white">Orders Page</div>} />

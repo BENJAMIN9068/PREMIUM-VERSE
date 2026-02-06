@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, Star, Shield, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Button from '../ui/Button';
 
 const HeroSection = () => {
@@ -44,10 +45,12 @@ const HeroSection = () => {
                                 Browse All Products
                                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
                             </Button>
-                            <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                                <Zap className="mr-2 text-warning" size={20} />
-                                Today's Deals
-                            </Button>
+                            <Link to="/deals">
+                                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                                    <Zap className="mr-2 text-warning" size={20} />
+                                    Today's Deals
+                                </Button>
+                            </Link>
                         </motion.div>
 
                         <motion.div
