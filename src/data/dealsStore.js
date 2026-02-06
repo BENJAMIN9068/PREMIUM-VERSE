@@ -1,62 +1,10 @@
 // Deals Store - Today's Deals with conditional offers
 import { ProductStore } from './productStore';
 
-// Sample deals data
-const sampleDeals = [
-    {
-        id: 1,
-        product_id: 1,
-        product_name: 'YouTube Premium',
-        product_image: 'https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg',
-        category: 'ott',
-        original_price: 299,
-        deal_price: 0, // FREE!
-        min_purchase_amount: 500, // Need to shop ₹500 to unlock
-        description: 'Get YouTube Premium FREE when you shop for ₹500 or more!',
-        start_date: new Date().toISOString().split('T')[0],
-        end_date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // 7 days from now
-        is_active: true,
-        is_featured: true,
-        created_at: new Date().toISOString()
-    },
-    {
-        id: 2,
-        product_id: 2,
-        product_name: 'Spotify Premium',
-        product_image: 'https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg',
-        category: 'ott',
-        original_price: 199,
-        deal_price: 49,
-        min_purchase_amount: 300,
-        description: 'Spotify Premium at just ₹49 when you shop for ₹300+',
-        start_date: new Date().toISOString().split('T')[0],
-        end_date: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-        is_active: true,
-        is_featured: false,
-        created_at: new Date().toISOString()
-    },
-    {
-        id: 3,
-        product_id: 3,
-        product_name: 'ChatGPT Plus',
-        product_image: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
-        category: 'ai_tools',
-        original_price: 1999,
-        deal_price: 999,
-        min_purchase_amount: 0, // No minimum purchase
-        description: '50% OFF on ChatGPT Plus - No minimum purchase!',
-        start_date: new Date().toISOString().split('T')[0],
-        end_date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-        is_active: true,
-        is_featured: true,
-        created_at: new Date().toISOString()
-    }
-];
-
 // LocalStorage key
 const DEALS_KEY = 'premiumverse_deals';
 
-// Load from localStorage or use sample data
+// Load from localStorage (no sample data)
 const loadDeals = () => {
     try {
         const stored = localStorage.getItem(DEALS_KEY);
@@ -66,7 +14,7 @@ const loadDeals = () => {
     } catch (e) {
         console.error('Error loading deals:', e);
     }
-    return sampleDeals;
+    return []; // Start with empty deals
 };
 
 // Save to localStorage
