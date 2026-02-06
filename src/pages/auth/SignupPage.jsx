@@ -152,8 +152,30 @@ const SignupPage = () => {
                     />
 
                     <div className="flex gap-2">
-                        <select className="bg-white/5 border border-white/10 rounded-lg text-white px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm appearance-none">
-                            <option value="+91">+91</option>
+                        <select
+                            className="bg-[#1a1a1a] border border-white/10 rounded-lg text-white px-3 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm appearance-none cursor-pointer"
+                            style={{ colorScheme: 'dark' }}
+                        >
+                            <option value="+91" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇮🇳 +91</option>
+                            <option value="+1" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇺🇸 +1</option>
+                            <option value="+44" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇬🇧 +44</option>
+                            <option value="+61" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇦🇺 +61</option>
+                            <option value="+971" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇦🇪 +971</option>
+                            <option value="+966" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇸🇦 +966</option>
+                            <option value="+65" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇸🇬 +65</option>
+                            <option value="+49" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇩🇪 +49</option>
+                            <option value="+33" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇫🇷 +33</option>
+                            <option value="+81" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇯🇵 +81</option>
+                            <option value="+86" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇨🇳 +86</option>
+                            <option value="+82" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇰🇷 +82</option>
+                            <option value="+880" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇧🇩 +880</option>
+                            <option value="+92" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇵🇰 +92</option>
+                            <option value="+977" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇳🇵 +977</option>
+                            <option value="+94" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇱🇰 +94</option>
+                            <option value="+55" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇧🇷 +55</option>
+                            <option value="+52" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇲🇽 +52</option>
+                            <option value="+7" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇷🇺 +7</option>
+                            <option value="+27" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇿🇦 +27</option>
                         </select>
                         <Input
                             name="phone"
