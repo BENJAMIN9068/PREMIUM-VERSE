@@ -8,6 +8,8 @@ import {
 import Button from '../../components/ui/Button';
 import { AnalyticsService, CHART_COLORS } from '../../services/analyticsService';
 import { ProductStore } from '../../data/productStore';
+import { OrdersStore } from '../../data/ordersStore';
+import { LeadsStore } from '../../data/leadsStore';
 
 // Stat Card Component
 const StatCard = ({ title, value, subtext, trend, trendValue, icon: Icon, iconColor = 'text-gray-400' }) => (
@@ -58,14 +60,61 @@ const Dashboard = () => {
     const loadData = () => {
         setLoading(true);
 
-        // Load all analytics data
+        // Load data from stores
         setTimeout(() => {
-            setStats(AnalyticsService.getDashboardStats());
-            setSalesData(AnalyticsService.getSalesTrendData(30));
-            setCategoryData(AnalyticsService.getCategoryRevenueData());
-            setTopProducts(AnalyticsService.getTopProductsData(10));
-            setMonthlyMargins(AnalyticsService.getMonthlyMarginsData(6));
-            setRecentOrders(AnalyticsService.getRecentOrders(5));
+            const allOrders = OrdersStore.getAllOrders();
+            const allProducts = ProductStore.getAllProducts();
+            const allLeads = LeadsStore.getAllLeads();
+
+            // Calculate Dashboard Stats
+            const today = new Date().toISOString().split('T')[0];
+            const thisMonth = new Date().toISOString().slice(0, 7);
+
+            const todayOrders = allOrders.filter(o => o.created_at.startsWith(today));
+            const monthOrders = allOrders.filter(o => o.created_at.startsWith(thisMonth));
+
+            const todayRevenue = todayOrders.reduce((sum, o) => sum + (parseFloat(o.total_amount) || 0), 0);
+            const monthRevenue = monthOrders.reduce((sum, o) => sum + (parseFloat(o.total_amount) || 0), 0);
+
+            // Stats Object
+            const dashboardStats = {
+                today: {
+                    sales: todayRevenue,
+                    orders: todayOrders.length,
+                    profit: Math.round(todayRevenue * 0.4), // Est. 40% profit until cost field added to orders 
+                    margin: todayRevenue > 0 ? 40 : 0
+                },
+                month: {
+                    revenue: monthRevenue,
+                    orders: monthOrders.length,
+                    profit: Math.round(monthRevenue * 0.4)
+                },
+                products: ProductStore.getStats(),
+                bestSeller: {
+                    name: 'Adobe CC', // Placeholder until order items logic added
+                    unitsSold: 0,
+                    revenue: 0
+                }
+            };
+
+            setStats(dashboardStats);
+            setSalesData([]); // Empty graph for now
+            setCategoryData([]); // Empty pie chart for now
+            setTopProducts([]); // Empty top products
+            setMonthlyMargins([]); // Empty margins 
+
+            // Real Recent Orders
+            setRecentOrders(allOrders.slice(0, 5).map(o => ({
+                id: o.order_id,
+                orderNumber: `#${o.order_id.split('-')[1]}`,
+                customer: o.customer_name || o.customer_email,
+                product: o.items?.[0]?.name || 'Product',
+                amount: o.total_amount,
+                profit: Math.round(o.total_amount * 0.4),
+                status: o.status,
+                date: new Date(o.created_at).toLocaleDateString()
+            })));
+
             setLoading(false);
         }, 300);
     };
@@ -303,9 +352,9 @@ const Dashboard = () => {
                                     </td>
                                     <td className="px-6 py-4">
                                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${order.status === 'Completed' ? 'bg-success/10 text-success' :
-                                                order.status === 'Processing' ? 'bg-primary/10 text-primary' :
-                                                    order.status === 'Pending' ? 'bg-warning/10 text-warning' :
-                                                        'bg-error/10 text-error'
+                                            order.status === 'Processing' ? 'bg-primary/10 text-primary' :
+                                                order.status === 'Pending' ? 'bg-warning/10 text-warning' :
+                                                    'bg-error/10 text-error'
                                             }`}>
                                             {order.status}
                                         </span>

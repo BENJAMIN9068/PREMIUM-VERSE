@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, AlertTriangle, ShoppingBag, IndianRupee, Filter, ChevronDown, ChevronUp } from 'lucide-react';
 import Navbar from '../../components/layout/Navbar';
@@ -9,35 +9,45 @@ import CategorySection from '../../components/dashboard/CategorySection';
 import OrderCard from '../../components/dashboard/OrderCard';
 import ExpiryAlert from '../../components/dashboard/ExpiryAlert';
 import { useAuth } from '../../context/AuthContext';
-import {
-    CATEGORIES,
-    MOCK_SUBSCRIPTIONS,
-    MOCK_ORDERS,
-    calculateStats,
-    getSubscriptionStatus,
-    getSubscriptionsByCategory
-} from '../../data/mockUserData';
+import { CATEGORIES } from '../../data/mockUserData'; // Keep categories for structure if needed, or move to constants
+import { OrdersStore } from '../../data/ordersStore';
 
 const UserDashboardPage = () => {
     const { user } = useAuth();
+    const [orders, setOrders] = useState([]);
     const [orderFilter, setOrderFilter] = useState('all');
     const [showExpiredAlert, setShowExpiredAlert] = useState(true);
     const [showExpiringAlert, setShowExpiringAlert] = useState(true);
     const [expandOrders, setExpandOrders] = useState(false);
 
-    const stats = useMemo(() => calculateStats(MOCK_SUBSCRIPTIONS, MOCK_ORDERS), []);
-    const groupedSubscriptions = useMemo(() => getSubscriptionsByCategory(MOCK_SUBSCRIPTIONS), []);
+    useEffect(() => {
+        if (user?.email) {
+            setOrders(OrdersStore.getOrdersByUserEmail(user.email));
+        }
+    }, [user]);
+
+    // Calculate real stats based on orders
+    const stats = useMemo(() => {
+        const activeCount = orders.filter(o => o.status === 'Completed').length; // Assuming completed orders are active subs for now
+        const totalSpent = orders.reduce((sum, o) => sum + (parseFloat(o.total_amount) || 0), 0);
+
+        return {
+            activeCount,
+            expiringCount: 0, // No real expiry tracking yet without detailed sub logic
+            totalOrders: orders.length,
+            totalSpent
+        };
+    }, [orders]);
+
+    const activeSubscriptions = []; // Placeholder until sub logic is separate from orders
 
     const filteredOrders = useMemo(() => {
-        if (orderFilter === 'all') return MOCK_ORDERS;
-        return MOCK_ORDERS.filter(order => order.orderStatus === orderFilter);
-    }, [orderFilter]);
+        if (orderFilter === 'all') return orders;
+        return orders.filter(order => order.status === orderFilter);
+    }, [orders, orderFilter]);
 
     // Only show first 5 orders unless expanded
     const displayedOrders = expandOrders ? filteredOrders : filteredOrders.slice(0, 5);
-
-    const expiredCount = MOCK_SUBSCRIPTIONS.filter(s => getSubscriptionStatus(s).isExpired).length;
-    const expiringCount = stats.expiringCount;
 
     const currentDate = new Date().toLocaleDateString('en-IN', {
         weekday: 'long',
@@ -46,9 +56,10 @@ const UserDashboardPage = () => {
         day: 'numeric',
     });
 
-    // Filter categories that have subscriptions (show them first), then empty ones
-    const categoriesWithSubs = CATEGORIES.filter(cat => groupedSubscriptions[cat.id]?.length > 0);
-    const emptyCategories = CATEGORIES.filter(cat => groupedSubscriptions[cat.id]?.length === 0);
+    // Grouping logic (placeholder)
+    const groupedSubscriptions = {};
+    const categoriesWithSubs = [];
+    const emptyCategories = CATEGORIES;
 
     return (
         <div className="min-h-screen bg-black text-white relative">
@@ -57,13 +68,7 @@ const UserDashboardPage = () => {
                 <Navbar />
 
                 <main className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-                    {/* Alerts */}
-                    {showExpiredAlert && expiredCount > 0 && (
-                        <ExpiryAlert type="expired" count={expiredCount} onDismiss={() => setShowExpiredAlert(false)} />
-                    )}
-                    {showExpiringAlert && expiringCount > 0 && (
-                        <ExpiryAlert type="warning" count={expiringCount} onDismiss={() => setShowExpiringAlert(false)} />
-                    )}
+                    {/* Alerts removed for now as no mock expiry data */}
 
                     {/* Welcome Section */}
                     <motion.div

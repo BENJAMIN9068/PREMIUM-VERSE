@@ -11,19 +11,44 @@ export const AdminAuthProvider = ({ children }) => {
     const [loginAttempts, setLoginAttempts] = useState(0);
     const [isLocked, setIsLocked] = useState(false);
 
+    // Idle Timer Logic
     useEffect(() => {
-        // Check for existing session
-        const storedAdmin = localStorage.getItem('admin_session');
-        const sessionTime = localStorage.getItem('admin_session_time');
+        let idleTimer;
+        const IDLE_TIMEOUT = 15 * 60 * 1000; // 15 minutes
 
-        if (storedAdmin && sessionTime) {
-            const currentTime = new Date().getTime();
-            const fourHours = 4 * 60 * 60 * 1000;
+        const resetTimer = () => {
+            if (admin) {
+                clearTimeout(idleTimer);
+                idleTimer = setTimeout(() => {
+                    console.log('Admin session timed out due to inactivity');
+                    logout();
+                }, IDLE_TIMEOUT);
+            }
+        };
 
-            if (currentTime - parseInt(sessionTime) < fourHours) {
+        // Events to detect activity
+        const events = ['mousedown', 'keydown', 'scroll', 'touchstart'];
+
+        if (admin) {
+            events.forEach(event => document.addEventListener(event, resetTimer));
+            resetTimer(); // Start timer initially
+        }
+
+        return () => {
+            clearTimeout(idleTimer);
+            events.forEach(event => document.removeEventListener(event, resetTimer));
+        };
+    }, [admin]);
+
+    useEffect(() => {
+        // Check for existing session in sessionStorage (NOT localStorage)
+        const storedAdmin = sessionStorage.getItem('admin_session');
+
+        if (storedAdmin) {
+            try {
                 setAdmin(JSON.parse(storedAdmin));
-            } else {
-                logout(); // Session expired
+            } catch (e) {
+                sessionStorage.removeItem('admin_session');
             }
         }
 
@@ -49,12 +74,13 @@ export const AdminAuthProvider = ({ children }) => {
             const adminData = {
                 email: email,
                 role: 'super_admin',
-                name: 'Admin'
+                name: 'Admin',
+                loginTime: new Date().getTime()
             };
 
             setAdmin(adminData);
-            localStorage.setItem('admin_session', JSON.stringify(adminData));
-            localStorage.setItem('admin_session_time', new Date().getTime().toString());
+            // Use sessionStorage so it clears when tab/browser closes
+            sessionStorage.setItem('admin_session', JSON.stringify(adminData));
             setLoginAttempts(0);
             return Promise.resolve();
         } else {
@@ -65,8 +91,7 @@ export const AdminAuthProvider = ({ children }) => {
 
     const logout = () => {
         setAdmin(null);
-        localStorage.removeItem('admin_session');
-        localStorage.removeItem('admin_session_time');
+        sessionStorage.removeItem('admin_session');
     };
 
     const value = {
