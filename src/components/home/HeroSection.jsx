@@ -88,7 +88,11 @@ const HeroSection = () => {
                             <div className="relative w-80 h-96 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl transform hover:scale-105 transition-transform duration-500 z-20 overflow-hidden">
                                 <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/30 rounded-full blur-2xl"></div>
                                 <div className="h-40 bg-gradient-to-br from-gray-800 to-black rounded-xl mb-4 flex items-center justify-center border border-white/5">
-                                    <span className="text-4xl">🎬</span>
+                                    <img
+                                        src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
+                                        alt="Netflix"
+                                        className="h-16 w-auto"
+                                    />
                                 </div>
                                 <h3 className="text-xl font-bold mb-2">Netflix Premium</h3>
                                 <div className="flex justify-between items-center mb-4">
