@@ -279,11 +279,58 @@ const AddressPage = () => {
                             name="country"
                             value={formData.country}
                             onChange={handleChange}
-                            disabled
-                            className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg text-white/50 focus:outline-none transition-all p-2.5 pl-10 appearance-none cursor-not-allowed"
+                            className="w-full bg-[#1a1a1a] border border-white/10 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 transition-all p-2.5 pl-10 appearance-none cursor-pointer"
                             style={{ colorScheme: 'dark' }}
                         >
                             <option value="India" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇮🇳 India</option>
+                            <option value="USA" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇺🇸 USA</option>
+                            <option value="Canada" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇨🇦 Canada</option>
+                            <option value="UK" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇬🇧 United Kingdom</option>
+                            <option value="Australia" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇦🇺 Australia</option>
+                            <option value="Germany" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇩🇪 Germany</option>
+                            <option value="France" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇫🇷 France</option>
+                            <option value="Japan" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇯🇵 Japan</option>
+                            <option value="China" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇨🇳 China</option>
+                            <option value="UAE" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇦🇪 UAE</option>
+                            <option value="Saudi Arabia" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇸🇦 Saudi Arabia</option>
+                            <option value="Singapore" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇸🇬 Singapore</option>
+                            <option value="Malaysia" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇲🇾 Malaysia</option>
+                            <option value="Indonesia" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇮🇩 Indonesia</option>
+                            <option value="Thailand" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇹🇭 Thailand</option>
+                            <option value="Vietnam" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇻🇳 Vietnam</option>
+                            <option value="South Korea" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇰🇷 South Korea</option>
+                            <option value="Bangladesh" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇧🇩 Bangladesh</option>
+                            <option value="Pakistan" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇵🇰 Pakistan</option>
+                            <option value="Sri Lanka" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇱🇰 Sri Lanka</option>
+                            <option value="Nepal" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇳🇵 Nepal</option>
+                            <option value="South Africa" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇿🇦 South Africa</option>
+                            <option value="Nigeria" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇳🇬 Nigeria</option>
+                            <option value="Kenya" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇰🇪 Kenya</option>
+                            <option value="Egypt" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇪🇬 Egypt</option>
+                            <option value="Brazil" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇧🇷 Brazil</option>
+                            <option value="Mexico" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇲🇽 Mexico</option>
+                            <option value="Russia" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇷🇺 Russia</option>
+                            <option value="Italy" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇮🇹 Italy</option>
+                            <option value="Spain" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇪🇸 Spain</option>
+                            <option value="Netherlands" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇳🇱 Netherlands</option>
+                            <option value="Sweden" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇸🇪 Sweden</option>
+                            <option value="Norway" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇳🇴 Norway</option>
+                            <option value="Denmark" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇩🇰 Denmark</option>
+                            <option value="Switzerland" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇨🇭 Switzerland</option>
+                            <option value="Austria" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇦🇹 Austria</option>
+                            <option value="Poland" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇵🇱 Poland</option>
+                            <option value="Turkey" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇹🇷 Turkey</option>
+                            <option value="Israel" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇮🇱 Israel</option>
+                            <option value="New Zealand" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇳🇿 New Zealand</option>
+                            <option value="Philippines" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇵🇭 Philippines</option>
+                            <option value="Ireland" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇮🇪 Ireland</option>
+                            <option value="Portugal" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇵🇹 Portugal</option>
+                            <option value="Greece" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇬🇷 Greece</option>
+                            <option value="Belgium" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇧🇪 Belgium</option>
+                            <option value="Hungary" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇭🇺 Hungary</option>
+                            <option value="Czech Republic" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇨🇿 Czech Republic</option>
+                            <option value="Romania" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇷🇴 Romania</option>
+                            <option value="Ukraine" style={{ backgroundColor: '#1a1a1a', color: 'white' }}>🇺🇦 Ukraine</option>
                         </select>
                     </div>
                 </div>
