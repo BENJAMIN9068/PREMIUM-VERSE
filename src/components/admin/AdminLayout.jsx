@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Package, ShoppingBag, Users, CreditCard, Settings, LogOut, Menu, X, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingBag, Users, CreditCard, Settings, LogOut, Menu, X, ChevronRight, Box } from 'lucide-react';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -18,6 +18,7 @@ const AdminLayout = () => {
 
     const navItems = [
         { icon: LayoutDashboard, label: 'Dashboard', path: '/admin/dashboard' },
+        { icon: Box, label: 'Products', path: '/admin/products' },
         { icon: Package, label: 'Stock Management', path: '/admin/stock' },
         { icon: ShoppingBag, label: 'Orders', path: '/admin/orders' },
         { icon: Users, label: 'Customers', path: '/admin/customers' },

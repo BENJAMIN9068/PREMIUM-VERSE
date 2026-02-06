@@ -15,6 +15,7 @@ import AdminLayout from './components/admin/AdminLayout';
 import ProtectedAdminRoute from './components/admin/ProtectedAdminRoute';
 import Dashboard from './pages/admin/Dashboard';
 import StockManagement from './pages/admin/StockManagement';
+import ProductsPage from './pages/admin/ProductsPage';
 import WarpPreloader from './components/ui/WarpPreloader';
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
                   </ProtectedAdminRoute>
                 }>
                   <Route path="dashboard" element={<Dashboard />} />
+                  <Route path="products" element={<ProductsPage />} />
                   <Route path="stock" element={<StockManagement />} />
                   {/* Placeholders for other admin pages */}
                   <Route path="orders" element={<div className="text-white">Orders Page</div>} />
