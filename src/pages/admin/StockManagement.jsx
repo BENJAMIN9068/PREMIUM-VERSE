@@ -1,23 +1,24 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Search, Filter, Plus, Edit2, Trash2, AlertCircle, CheckCircle, Clock, Save } from 'lucide-react';
 import Button from '../../components/ui/Button';
 import ProductModal from '../../components/admin/ProductModal';
-
-// Mock Data
-const INITIAL_PRODUCTS = Array.from({ length: 35 }).map((_, i) => ({
-    id: i + 1,
-    name: i % 2 === 0 ? `Netflix Premium ${i + 1}` : `Windows 11 Pro ${i + 1}`,
-    category: i % 2 === 0 ? 'Streaming Services' : 'Software Licenses',
-    sku: `SKU-${1000 + i}`,
-    stockStatus: i % 5 === 0 ? 'out_of_stock' : i % 3 === 0 ? 'low_stock' : 'in_stock',
-    quantity: i % 5 === 0 ? 0 : Math.floor(Math.random() * 50),
-    price: i % 2 === 0 ? 499 : 599,
-    originalPrice: i % 2 === 0 ? 999 : 1499,
-    features: ['Instant Delivery', 'Warranty'],
-}));
+import { ProductStore } from '../../data/productStore';
 
 const StockManagement = () => {
-    const [products, setProducts] = useState(INITIAL_PRODUCTS);
+    const [products, setProducts] = useState(() => {
+        // Transform ProductStore data to stock management format
+        return ProductStore.getAllProducts().map(p => ({
+            id: p.id,
+            name: p.product_name,
+            category: p.category,
+            sku: p.sku,
+            stockStatus: p.stock_status || 'in_stock',
+            quantity: p.quantity || Math.floor(Math.random() * 50),
+            price: p.selling_price,
+            originalPrice: p.original_price,
+            features: ['Instant Delivery', 'Warranty'],
+        }));
+    });
     const [searchQuery, setSearchQuery] = useState('');
     const [statusFilter, setStatusFilter] = useState('all');
     const [selectedProduct, setSelectedProduct] = useState(null);

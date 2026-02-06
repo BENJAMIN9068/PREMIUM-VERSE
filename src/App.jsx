@@ -19,7 +19,7 @@ import ProductsPage from './pages/admin/ProductsPage';
 import AdminDealsPage from './pages/admin/DealsPage';
 import LeadsPage from './pages/admin/LeadsPage';
 import PublicDealsPage from './pages/deals/DealsPage';
-import WarpPreloader from './components/ui/WarpPreloader';
+import BlackHolePreloader from './components/ui/BlackHolePreloader';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -29,7 +29,7 @@ function App() {
       <AdminAuthProvider>
         <AnimatePresence mode="wait">
           {loading ? (
-            <WarpPreloader key="preloader" onComplete={() => setLoading(false)} />
+            <BlackHolePreloader key="preloader" onComplete={() => setLoading(false)} />
           ) : (
             <BrowserRouter>
               <Routes>
