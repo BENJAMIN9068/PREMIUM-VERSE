@@ -1,0 +1,14 @@
+[
+    {
+        "name": "YouTube Premium",
+        "validity": "3 Months",
+        "price": 200,
+        "availability": "In Stock"
+    },
+    {
+        "name": "Netflix Premium",
+        "validity": "1 Month",
+        "price": 150,
+        "availability": "In Stock"
+    }
+]
