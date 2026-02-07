@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { LeadsStore } from '../data/leadsStore';
+import { sendWelcomeEmail } from '../services/emailService';
 
 const AuthContext = createContext();
 
@@ -63,7 +64,12 @@ export const AuthProvider = ({ children }) => {
                 localStorage.setItem('user', JSON.stringify(userData));
 
                 // Save to leads store
-                LeadsStore.addLead(userData);
+                const newLead = LeadsStore.addLead(userData);
+
+                // Send welcome email if new lead created
+                if (newLead && newLead.created_at === newLead.updated_at) {
+                    sendWelcomeEmail(userData);
+                }
 
                 resolve(userData);
             } catch (error) {
@@ -103,6 +109,9 @@ export const AuthProvider = ({ children }) => {
 
         // Save to leads store
         LeadsStore.addLead(newUser);
+
+        // Send welcome email
+        sendWelcomeEmail(newUser);
 
         return Promise.resolve(newUser);
     };
