@@ -25,5 +25,8 @@ export const calculateStats = () => ({
     totalOrders: 0,
     totalSpent: 0
 });
-export const getSubscriptionStatus = () => ({ isExpired: false });
+export const getSubscriptionStatus = () => ({ isExpired: false, color: 'success', label: 'Active' });
 export const getSubscriptionsByCategory = () => ({});
+export const getProgressPercentage = () => 0;
+export const formatCountdown = () => 'N/A';
+export const shouldShowCredentials = () => false;
