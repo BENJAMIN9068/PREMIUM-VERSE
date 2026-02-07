@@ -15,6 +15,7 @@ const BlackHolePreloader = ({ onComplete }) => {
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
+        let lastTime = 0;
 
         // Resize handling
         const setSize = () => {
@@ -37,9 +38,10 @@ const BlackHolePreloader = ({ onComplete }) => {
                 x: cx + Math.cos(angle) * distance,
                 y: cy + Math.sin(angle) * distance,
                 size: Math.random() * 3 + 1,
-                speed: Math.random() * 2 + 1,
+                speed: (Math.random() * 2 + 1) * 60, // Normalize speed for delta time
                 angle: angle,
-                color: Math.random() > 0.3 ? '#ffffff' : (Math.random() > 0.5 ? '#8B5CF6' : '#06B6D4'),
+                // Grayscale colors: varying shades of white/grey
+                color: Math.random() > 0.5 ? '#ffffff' : '#a0a0a0',
                 trail: []
             });
         }
@@ -50,7 +52,14 @@ const BlackHolePreloader = ({ onComplete }) => {
 
         let startTime = Date.now();
 
-        const animate = () => {
+        const animate = (time) => {
+            const deltaTime = (time - lastTime) / 1000;
+            lastTime = time;
+            // Cap delta time to prevent huge jumps if tab is inactive
+            const dt = Math.min(deltaTime, 0.1);
+            // Multiplier to normalize speed (assuming ~60fps baseline)
+            const moveFactor = dt * 60;
+
             const elapsed = Date.now() - startTime;
             const progress = Math.min(elapsed / SUCK_DURATION, 1);
 
@@ -62,11 +71,10 @@ const BlackHolePreloader = ({ onComplete }) => {
             glowIntensity = progress * 0.8;
             const glowRadius = 50 + progress * 100;
 
-            // Outer glow - purple/cyan gradient
+            // Outer glow - Monochrome gradient
             const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, glowRadius);
-            gradient.addColorStop(0, `rgba(139, 92, 246, ${glowIntensity * 0.5})`);
-            gradient.addColorStop(0.3, `rgba(6, 182, 212, ${glowIntensity * 0.3})`);
-            gradient.addColorStop(0.7, `rgba(139, 92, 246, ${glowIntensity * 0.1})`);
+            gradient.addColorStop(0, `rgba(255, 255, 255, ${glowIntensity * 0.3})`);
+            gradient.addColorStop(0.5, `rgba(100, 100, 100, ${glowIntensity * 0.1})`);
             gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -77,8 +85,12 @@ const BlackHolePreloader = ({ onComplete }) => {
             ctx.arc(cx, cy, blackHoleRadius, 0, Math.PI * 2);
             ctx.fillStyle = '#000000';
             ctx.fill();
+            // Subtle white ring for definition
+            ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 + progress * 0.3})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
 
-            // Accretion disk effect
+            // Accretion disk effect - White/Gray rings
             ctx.save();
             ctx.translate(cx, cy);
             ctx.rotate(elapsed * 0.002);
@@ -86,7 +98,7 @@ const BlackHolePreloader = ({ onComplete }) => {
                 const ringRadius = blackHoleRadius + 15 + ring * 20;
                 ctx.beginPath();
                 ctx.arc(0, 0, ringRadius, 0, Math.PI * 2);
-                ctx.strokeStyle = `rgba(139, 92, 246, ${0.3 - ring * 0.1})`;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 - ring * 0.05})`;
                 ctx.lineWidth = 2 - ring * 0.5;
                 ctx.stroke();
             }
@@ -103,9 +115,9 @@ const BlackHolePreloader = ({ onComplete }) => {
                 const pullStrength = 0.02 + progress * 0.15;
                 const spiralOffset = 0.3; // Adds spiral motion
 
-                // Move towards center with spiral
-                p.x += dx * pullStrength + dy * spiralOffset * 0.01;
-                p.y += dy * pullStrength - dx * spiralOffset * 0.01;
+                // Move towards center with spiral using delta time
+                p.x += (dx * pullStrength + dy * spiralOffset * 0.01) * moveFactor;
+                p.y += (dy * pullStrength - dx * spiralOffset * 0.01) * moveFactor;
 
                 // Store trail points
                 p.trail.push({ x: p.x, y: p.y });
@@ -150,8 +162,8 @@ const BlackHolePreloader = ({ onComplete }) => {
             ctx.fillStyle = `rgba(255, 255, 255, ${0.8 + Math.sin(elapsed * 0.01) * 0.2})`;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.shadowColor = '#8B5CF6';
-            ctx.shadowBlur = 20;
+            ctx.shadowColor = '#ffffff';
+            ctx.shadowBlur = 10;
             ctx.fillText('PREMIUM VERSE', cx, cy);
             ctx.restore();
 
@@ -188,13 +200,13 @@ const BlackHolePreloader = ({ onComplete }) => {
         >
             <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
-            {/* White/Purple Flash Overlay */}
+            {/* White Flash Overlay - Monochrome */}
             <motion.div
                 className="absolute inset-0 pointer-events-none"
                 initial={{ opacity: 0 }}
                 animate={phase === 'flash' ? {
                     opacity: [0, 1, 1, 0],
-                    background: ['rgba(139, 92, 246, 0)', 'rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 0)']
+                    background: ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 1)', 'rgba(255, 255, 255, 0)']
                 } : {}}
                 transition={{ duration: 0.6, times: [0, 0.2, 0.6, 1] }}
             />
