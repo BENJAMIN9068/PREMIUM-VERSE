@@ -96,66 +96,91 @@ const HeroSection = () => {
                         </motion.div>
                     </div>
 
-                    {/* Right Visual - Dynamic Card Shuffling */}
+                    {/* Right Visual - Heroic 3D Card Stack */}
                     <div className="relative hidden lg:flex h-[600px] w-full items-center justify-center perspective-1000">
-                        <div className="relative w-80 h-96">
+                        <div className="relative w-80 h-[450px]">
                             <AnimatePresence mode="popLayout">
                                 {cards.map((card, index) => {
+                                    // Only show top 3 cards for performance and visual clarity
+                                    if (index > 2) return null;
+
                                     return (
                                         <motion.div
                                             key={card.id}
                                             layoutId={card.id}
-                                            initial={{ scale: 0.8, y: 40, opacity: 0, zIndex: 0 }}
+                                            initial={{ scale: 0.9, y: 50, opacity: 0, z: -100 }}
                                             animate={{
-                                                scale: index === 0 ? 1 : 1 - index * 0.05,
-                                                y: index * 15,
-                                                opacity: 1 - index * 0.2, // Fade out back cards
-                                                zIndex: cards.length - index, // Front card on top
+                                                scale: index === 0 ? 1 : 1 - index * 0.05, // Front card largest
+                                                y: index * 20, // Stack effect downwards
+                                                z: -index * 50, // Depth effect
+                                                opacity: 1 - index * 0.15,
+                                                zIndex: cards.length - index,
                                                 rotateX: index === 0 ? 0 : 5, // Slight tilt for back cards
                                             }}
                                             exit={{
-                                                scale: 0.5,
-                                                y: 100,
+                                                x: -100, // Slide out to left
+                                                y: 20,
                                                 opacity: 0,
-                                                transition: { duration: 0.5 }
+                                                rotate: -10,
+                                                scale: 0.9,
+                                                transition: { duration: 0.4 }
                                             }}
                                             transition={{
-                                                duration: 0.8,
-                                                ease: [0.32, 0.72, 0, 1]
+                                                type: "spring",
+                                                stiffness: 200,
+                                                damping: 20,
+                                                mass: 1
                                             }}
-                                            className="absolute inset-0 rounded-2xl p-6 shadow-2xl border border-white/10 backdrop-blur-xl overflow-hidden origin-bottom"
+                                            className="absolute inset-0 rounded-3xl p-6 shadow-2xl border border-white/10 backdrop-blur-xl overflow-hidden"
                                             style={{
-                                                backgroundColor: index === 0 ? 'rgba(0,0,0,0.6)' : 'rgba(0,0,0,0.4)',
+                                                background: index === 0
+                                                    ? 'linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.4) 100%)'
+                                                    : 'rgba(0,0,0,0.6)',
+                                                boxShadow: index === 0 ? '0 25px 50px -12px rgba(0, 0, 0, 0.5)' : 'none',
                                                 transformStyle: 'preserve-3d'
                                             }}
                                         >
                                             {/* Glow Effect for front card */}
                                             {index === 0 && (
-                                                <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
+                                                <>
+                                                    <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                                                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+                                                </>
                                             )}
 
                                             {/* Card Content */}
                                             <div className="relative z-10 flex flex-col h-full">
-                                                <div className="h-40 bg-gradient-to-br from-gray-800/50 to-black/50 rounded-xl mb-4 flex items-center justify-center border border-white/5 p-4">
-                                                    <img
-                                                        src={card.logo}
-                                                        alt={card.name}
-                                                        className="h-16 w-auto object-contain drop-shadow-lg"
-                                                    />
+                                                {/* Logo Area with improved visibility */}
+                                                <div className="h-48 bg-gray-900/50 rounded-2xl mb-6 flex items-center justify-center border border-white/5 relative overflow-hidden group-hover:border-primary/30 transition-colors">
+                                                    <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+                                                    {/* Logo Container - White background for visibility */}
+                                                    <div className="w-24 h-24 bg-white rounded-2xl flex items-center justify-center shadow-lg p-4 transform group-hover:scale-110 transition-transform duration-500">
+                                                        <img
+                                                            src={card.logo}
+                                                            alt={card.name}
+                                                            className="w-full h-full object-contain"
+                                                        />
+                                                    </div>
                                                 </div>
-                                                <h3 className="text-xl font-bold mb-2 text-white">{card.name}</h3>
-                                                <div className="flex justify-between items-center mt-auto mb-4">
+
+                                                <h3 className="text-2xl font-bold mb-2 text-white tracking-tight">{card.name}</h3>
+
+                                                <div className="flex justify-between items-end mt-auto mb-6">
                                                     <div className="flex flex-col">
-                                                        <span className="text-gray-500 text-xs uppercase tracking-wider">Original</span>
-                                                        <span className="text-gray-400 line-through text-sm">₹{card.originalPrice}</span>
+                                                        <span className="text-gray-400 text-xs font-medium uppercase tracking-wider mb-1">Original Price</span>
+                                                        <span className="text-gray-500 line-through text-lg">₹{card.originalPrice}</span>
                                                     </div>
                                                     <div className="text-right">
-                                                        <span className="text-xs text-primary font-medium bg-primary/10 px-2 py-0.5 rounded mb-1 inline-block">Save 90%</span>
-                                                        <div className="text-2xl font-bold text-white">₹{card.price}</div>
+                                                        <span className="text-xs text-black font-bold bg-primary px-2 py-1 rounded-md mb-2 inline-block shadow-lg shadow-primary/25">
+                                                            SAVE 90%
+                                                        </span>
+                                                        <div className="text-3xl font-bold text-white tracking-tight">₹{card.price}</div>
                                                     </div>
                                                 </div>
-                                                <Button size="sm" className="w-full bg-white/10 hover:bg-white/20 border border-white/10">
-                                                    Check Details
+
+                                                <Button size="lg" className="w-full bg-white text-black hover:bg-gray-100 border-none font-bold">
+                                                    Get It Now
                                                 </Button>
                                             </div>
                                         </motion.div>
