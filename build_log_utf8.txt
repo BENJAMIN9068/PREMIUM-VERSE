@@ -1,0 +1,40 @@
+﻿
+> space-commerce@0.0.0 build
+> vite build
+
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+node.exe : 
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+/grid.svg referenced in /grid.svg didn't resolve at build time, it will remain unchanged to be resolved at runtime
+[32mΓ£ô[39m 2826 modules transformed.
+[31mΓ£ù[39m Build failed in 4.80s
+[31merror during build:
+[31msrc/components/dashboard/AccountSharingCard.jsx (4:32): "getProgressPercentage" is not exported by 
+"src/data/mockUserData.js", imported by "src/components/dashboard/AccountSharingCard.jsx".[31m
+file: [36mD:/PREMIUM-VERSE/src/components/dashboard/AccountSharingCard.jsx:4:32[31m
+[33m
+2: import { motion } from 'framer-motion';
+3: import { Eye, EyeOff, Copy, Check, RefreshCcw, HelpCircle, Lock } from 'lucide-react';
+4: import { getSubscriptionStatus, getProgressPercentage, formatCountdown, shouldShowCredentials } from 
+'../../data/mock...
+                                   ^
+5: import Button from '../ui/Button';
+[31m
+    at getRollupError (file:///D:/PREMIUM-VERSE/node_modules/rollup/dist/es/shared/parseAst.js:402:41)
+    at error (file:///D:/PREMIUM-VERSE/node_modules/rollup/dist/es/shared/parseAst.js:398:42)
+    at Module.error (file:///D:/PREMIUM-VERSE/node_modules/rollup/dist/es/shared/node-entry.js:17040:16)
+    at Module.traceVariable (file:///D:/PREMIUM-VERSE/node_modules/rollup/dist/es/shared/node-entry.js:17452:29)
+    at ModuleScope.findVariable (file:///D:/PREMIUM-VERSE/node_modules/rollup/dist/es/shared/node-entry.js:15070:39)
+    at ReturnValueScope.findVariable 
+(file:///D:/PREMIUM-VERSE/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at FunctionBodyScope.findVariable 
+(file:///D:/PREMIUM-VERSE/node_modules/rollup/dist/es/shared/node-entry.js:5673:38)
+    at Identifier.bind (file:///D:/PREMIUM-VERSE/node_modules/rollup/dist/es/shared/node-entry.js:5447:40)
+    at CallExpression.bind (file:///D:/PREMIUM-VERSE/node_modules/rollup/dist/es/shared/node-entry.js:2829:23)
+    at CallExpression.bind (file:///D:/PREMIUM-VERSE/node_modules/rollup/dist/es/shared/node-entry.js:12179:15)[39m

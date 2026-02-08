@@ -47,6 +47,8 @@ const transformExistingProducts = () => {
         const providerCost = Math.round(product.price * providerCostRatio);
         const { profitAmount, profitPercentage } = calculateProfit(providerCost, product.price);
 
+        const isWhatsApp = Math.random() > 0.5;
+
         return {
             id: product.id,
             product_name: product.name,
@@ -56,6 +58,9 @@ const transformExistingProducts = () => {
             image_url: product.logo || '',
             provider_name: `Provider ${(index % 5) + 1}`,
             provider_cost: providerCost,
+            provider_contact: isWhatsApp ? '+91 98765 43210' : 'https://example-provider.com',
+            provider_source: isWhatsApp ? 'WhatsApp' : 'Website',
+            last_updated: new Date().toISOString(),
             selling_price: product.price,
             original_price: product.originalPrice,
             profit_amount: profitAmount,
