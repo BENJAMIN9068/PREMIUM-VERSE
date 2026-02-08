@@ -1,9 +1,33 @@
-import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Star, Shield, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Button from '../ui/Button';
+import { LOGOS } from '../../data/products';
+
+const HERO_CARDS = [
+    { id: 'netflix', name: 'Netflix Premium', price: 499, originalPrice: 7788, logo: LOGOS.netflix },
+    { id: 'youtube', name: 'YouTube Premium', price: 279, originalPrice: 1668, logo: LOGOS.youtube },
+    { id: 'capcut', name: 'CapCut Pro', price: 199, originalPrice: 999, logo: 'https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/capcut.svg' }, // Providing direct SVG for CapCut if not in LOGOS
+    { id: 'gemini', name: 'Gemini Advanced', price: 399, originalPrice: 1950, logo: LOGOS.gemini },
+    { id: 'spotify', name: 'Spotify Premium', price: 449, originalPrice: 1428, logo: LOGOS.spotify },
+];
 
 const HeroSection = () => {
+    const [cards, setCards] = useState(HERO_CARDS);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCards((prevCards) => {
+                const newCards = [...prevCards];
+                const firstCard = newCards.shift();
+                newCards.push(firstCard);
+                return newCards;
+            });
+        }, 4000);
+
+        return () => clearInterval(interval);
+    }, []);
     return (
         <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
             {/* Dynamic Background */}
@@ -72,47 +96,73 @@ const HeroSection = () => {
                         </motion.div>
                     </div>
 
-                    {/* Right Visual - 3D/Floating Cards Effect */}
-                    <div className="relative hidden lg:block h-[600px] w-full perspective-1000">
-                        <motion.div
-                            animate={{
-                                y: [-20, 20, -20],
-                                rotateX: [0, 5, 0],
-                                rotateY: [0, -5, 0]
-                            }}
-                            transition={{
-                                duration: 6,
-                                repeat: Infinity,
-                                ease: "easeInOut"
-                            }}
-                            className="absolute inset-0 flex items-center justify-center preserve-3d"
-                        >
-                            {/* Central Card */}
-                            <div className="relative w-80 h-96 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-6 shadow-2xl transform hover:scale-105 transition-transform duration-500 z-20 overflow-hidden">
-                                <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/30 rounded-full blur-2xl"></div>
-                                <div className="h-40 bg-gradient-to-br from-gray-800 to-black rounded-xl mb-4 flex items-center justify-center border border-white/5">
-                                    <img
-                                        src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg"
-                                        alt="Netflix"
-                                        className="h-16 w-auto"
-                                    />
-                                </div>
-                                <h3 className="text-xl font-bold mb-2">Netflix Premium</h3>
-                                <div className="flex justify-between items-center mb-4">
-                                    <span className="text-gray-400 line-through text-sm">₹7,788</span>
-                                    <span className="text-2xl font-bold text-primary">₹499</span>
-                                </div>
-                                <Button size="sm" className="w-full">Buy Now</Button>
-                            </div>
+                    {/* Right Visual - Dynamic Card Shuffling */}
+                    <div className="relative hidden lg:flex h-[600px] w-full items-center justify-center perspective-1000">
+                        <div className="relative w-80 h-96">
+                            <AnimatePresence mode="popLayout">
+                                {cards.map((card, index) => {
+                                    return (
+                                        <motion.div
+                                            key={card.id}
+                                            layoutId={card.id}
+                                            initial={{ scale: 0.8, y: 40, opacity: 0, zIndex: 0 }}
+                                            animate={{
+                                                scale: index === 0 ? 1 : 1 - index * 0.05,
+                                                y: index * 15,
+                                                opacity: 1 - index * 0.2, // Fade out back cards
+                                                zIndex: cards.length - index, // Front card on top
+                                                rotateX: index === 0 ? 0 : 5, // Slight tilt for back cards
+                                            }}
+                                            exit={{
+                                                scale: 0.5,
+                                                y: 100,
+                                                opacity: 0,
+                                                transition: { duration: 0.5 }
+                                            }}
+                                            transition={{
+                                                duration: 0.8,
+                                                ease: [0.32, 0.72, 0, 1]
+                                            }}
+                                            className="absolute inset-0 rounded-2xl p-6 shadow-2xl border border-white/10 backdrop-blur-xl overflow-hidden origin-bottom"
+                                            style={{
+                                                backgroundColor: index === 0 ? 'rgba(0,0,0,0.6)' : 'rgba(0,0,0,0.4)',
+                                                transformStyle: 'preserve-3d'
+                                            }}
+                                        >
+                                            {/* Glow Effect for front card */}
+                                            {index === 0 && (
+                                                <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl animate-pulse"></div>
+                                            )}
 
-                            {/* Floating Elements Background */}
-                            <div className="absolute top-10 right-10 w-64 h-80 bg-black/20 backdrop-blur-md border border-white/5 rounded-2xl transform translate-z-[-50px] rotate-12 z-10 p-4">
-                                <div className="h-full w-full bg-white/5 rounded-xl"></div>
-                            </div>
-                            <div className="absolute bottom-10 left-10 w-64 h-80 bg-black/20 backdrop-blur-md border border-white/5 rounded-2xl transform translate-z-[-50px] -rotate-12 z-10 p-4">
-                                <div className="h-full w-full bg-white/5 rounded-xl"></div>
-                            </div>
-                        </motion.div>
+                                            {/* Card Content */}
+                                            <div className="relative z-10 flex flex-col h-full">
+                                                <div className="h-40 bg-gradient-to-br from-gray-800/50 to-black/50 rounded-xl mb-4 flex items-center justify-center border border-white/5 p-4">
+                                                    <img
+                                                        src={card.logo}
+                                                        alt={card.name}
+                                                        className="h-16 w-auto object-contain drop-shadow-lg"
+                                                    />
+                                                </div>
+                                                <h3 className="text-xl font-bold mb-2 text-white">{card.name}</h3>
+                                                <div className="flex justify-between items-center mt-auto mb-4">
+                                                    <div className="flex flex-col">
+                                                        <span className="text-gray-500 text-xs uppercase tracking-wider">Original</span>
+                                                        <span className="text-gray-400 line-through text-sm">₹{card.originalPrice}</span>
+                                                    </div>
+                                                    <div className="text-right">
+                                                        <span className="text-xs text-primary font-medium bg-primary/10 px-2 py-0.5 rounded mb-1 inline-block">Save 90%</span>
+                                                        <div className="text-2xl font-bold text-white">₹{card.price}</div>
+                                                    </div>
+                                                </div>
+                                                <Button size="sm" className="w-full bg-white/10 hover:bg-white/20 border border-white/10">
+                                                    Check Details
+                                                </Button>
+                                            </div>
+                                        </motion.div>
+                                    );
+                                })}
+                            </AnimatePresence>
+                        </div>
                     </div>
 
                 </div>

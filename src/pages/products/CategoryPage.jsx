@@ -6,6 +6,7 @@ import Navbar from '../../components/layout/Navbar';
 import Footer from '../../components/layout/Footer';
 import SpaceBackground from '../../components/ui/SpaceBackground';
 import ProductCard from '../../components/products/ProductCard';
+import CategoryIcon from '../../components/products/CategoryIcon';
 import { PRODUCTS, PRODUCT_CATEGORIES, getProductsByCategory, getCategoryById, searchProducts } from '../../data/products';
 
 const CategoryPage = () => {
@@ -82,7 +83,7 @@ const CategoryPage = () => {
                             <Link to="/products" className="p-2 bg-white/5 rounded-full hover:bg-white/10 transition-colors">
                                 <ChevronLeft size={20} />
                             </Link>
-                            {!isAllProducts && <span className="text-4xl">{category?.icon}</span>}
+                            {!isAllProducts && <CategoryIcon id={category?.id} className="text-4xl w-10 h-10 text-primary" />}
                             <div>
                                 <h1 className="text-3xl md:text-4xl font-bold font-display">
                                     {isAllProducts ? 'All Products' : category?.name}
@@ -107,7 +108,7 @@ const CategoryPage = () => {
                                     to={`/products/${cat.id}`}
                                     className="shrink-0 flex items-center gap-2 px-5 py-3 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-primary/50 transition-all group"
                                 >
-                                    <span className="text-xl">{cat.icon}</span>
+                                    <CategoryIcon id={cat.id} className="text-xl w-6 h-6 text-primary" />
                                     <span className="text-sm font-medium text-gray-300 group-hover:text-white">{cat.name}</span>
                                     <span className="text-xs text-gray-500 bg-white/5 px-2 py-0.5 rounded-full">
                                         {getProductsByCategory(cat.id).length}
@@ -190,7 +191,9 @@ const CategoryPage = () => {
                                         to={`/products/${cat.id}`}
                                         className="flex flex-col items-center gap-2 p-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 hover:border-primary/50 transition-all text-center group"
                                     >
-                                        <span className="text-3xl group-hover:scale-110 transition-transform">{cat.icon}</span>
+                                        <div className="group-hover:scale-110 transition-transform">
+                                            <CategoryIcon id={cat.id} className="text-3xl w-10 h-10 text-primary" />
+                                        </div>
                                         <span className="text-sm text-gray-300 group-hover:text-white">{cat.name}</span>
                                     </Link>
                                 ))}
